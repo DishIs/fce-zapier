@@ -7,7 +7,7 @@ const testAuth = async (z, bundle) => {
   const response = await z.request({
     url: 'https://api2.freecustom.email/v1/me',
   });
-  return response.data;
+  return response.data.data || response.data;
 };
 
 module.exports = {
@@ -23,5 +23,5 @@ module.exports = {
     },
   ],
   test: testAuth,
-  connectionLabel: '{{data.plan_label}} plan · {{data.api_inbox_count}} inboxes',
+  connectionLabel: '{{plan_label}} plan · {{api_inbox_count}} inboxes',
 };
