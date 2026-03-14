@@ -4,7 +4,7 @@ const perform = async (z, bundle) => {
     url:    `https://api2.freecustom.email/v1/inboxes/${encodeURIComponent(bundle.inputData.inbox)}/otp`,
     method: 'GET',
   });
-  return [response.data];
+  return response.data;
 };
 
 module.exports = {
