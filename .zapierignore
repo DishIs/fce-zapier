@@ -1,0 +1,11 @@
+.env
+.env.example
+.git
+.gitignore
+.vscode
+test/
+*.test.js
+ZAPIER_BUILD_GUIDE.md
+LICENSE
+package-lock.json
+node_modules/
