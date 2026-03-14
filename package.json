@@ -1,6 +1,6 @@
 {
   "name": "freecustom-email-zapier",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Disposable email inboxes with OTP extraction and real-time delivery for Zapier",
   "keywords": [
