@@ -9,8 +9,19 @@ const perform = async (z, bundle) => {
     url:    `https://api2.freecustom.email/v1/inboxes/${encodeURIComponent(inbox)}/messages/${encodeURIComponent(messageId)}`,
     method: 'GET',
   });
-  const data = response.data.data || response.data;
-  return [data];
+  const m = response.data.data || response.data;
+  return [{
+    id:               m.message_id || m.id,
+    from:             m.from,
+    to:               m.inbox || m.to,
+    subject:          m.subject,
+    date:             m.received_at || m.date,
+    text:             m.message || m.text,
+    html:             m.html || '',
+    otp:              m.otp,
+    verificationLink: m.verification_link || m.verificationLink,
+    hasAttachment:    m.has_attachment || m.hasAttachment || false,
+  }];
 };
 
 module.exports = {

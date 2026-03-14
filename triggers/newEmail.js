@@ -31,7 +31,35 @@ const getFallbackEmails = async (z, bundle) => {
     url:    `https://api2.freecustom.email/v1/inboxes/${encodeURIComponent(bundle.inputData.inbox)}/messages`,
     method: 'GET',
   });
-  return response.data.data || [];
+  const messages = response.data.data || [];
+  return messages.map(m => ({
+    id:               m.message_id || m.id,
+    from:             m.from,
+    to:               m.inbox || m.to,
+    subject:          m.subject,
+    date:             m.received_at || m.date,
+    text:             m.message || m.text,
+    html:             m.html || '',
+    otp:              m.otp,
+    verificationLink: m.verification_link || m.verificationLink,
+    hasAttachment:    m.has_attachment || m.hasAttachment || false,
+  }));
+};
+
+const perform = (z, bundle) => {
+  const m = bundle.cleanedRequest;
+  return [{
+    id:               m.message_id || m.id,
+    from:             m.from,
+    to:               m.inbox || m.to,
+    subject:          m.subject,
+    date:             m.received_at || m.date,
+    text:             m.message || m.text,
+    html:             m.html || '',
+    otp:              m.otp,
+    verificationLink: m.verification_link || m.verificationLink,
+    hasAttachment:    m.has_attachment || m.hasAttachment || false,
+  }];
 };
 
 module.exports = {
@@ -64,7 +92,7 @@ module.exports = {
     performUnsubscribe: unsubscribeHook,
     // D006: performList satisfies the "polling URL for REST Hook" requirement
     performList:        getFallbackEmails,
-    perform:            (z, bundle) => [bundle.cleanedRequest],
+    perform:            perform,
 
     sample: {
       id:               'D3vt8NnEQ',

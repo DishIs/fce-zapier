@@ -7,8 +7,12 @@ const perform = async (z, bundle) => {
     url:    `https://api2.freecustom.email/v1/inboxes/${encodeURIComponent(bundle.inputData.inbox)}/messages`,
     method: 'GET',
   });
+  const messages = response.data.data || [];
   // Zapier triggers expect an array of objects
-  return response.data.data || [];
+  return messages.map(m => ({
+    id:      m.message_id || m.id,
+    subject: m.subject,
+  }));
 };
 
 module.exports = {

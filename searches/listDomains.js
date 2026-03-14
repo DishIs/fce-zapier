@@ -7,9 +7,13 @@ const perform = async (z, bundle) => {
     url:    'https://api2.freecustom.email/v1/domains',
     method: 'GET',
   });
-  const all = response.data.data || [];
+  const all = (response.data.data || []).map(d => ({ ...d, id: d.domain }));
   const tier = bundle.inputData.tier;
-  return tier ? all.filter(d => d.tier === tier) : all;
+  const filtered = tier ? all.filter(d => d.tier === tier) : all;
+  return {
+    count:   filtered.length,
+    domains: filtered,
+  };
 };
 
 module.exports = {
@@ -35,10 +39,15 @@ module.exports = {
     ],
     perform,
     sample: {
-      domain:        'ditube.info',
-      tier:          'free',
-      tags:          ['popular'],
-      expiring_soon: false,
+      count:   1,
+      domains: [
+        {
+          domain:        'ditube.info',
+          tier:          'free',
+          tags:          ['popular'],
+          expiring_soon: false,
+        },
+      ],
     },
     outputFields: [
       { key: 'domain',          label: 'Domain' },

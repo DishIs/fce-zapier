@@ -59,12 +59,7 @@ const App = {
   },
 
   searches: {
-    [listInboxes.key]:    listInboxes,
-    [listMessages.key]:   listMessages,
     [getMessage.key]:     getMessage,
-    [listDomains.key]:    listDomains,
-    [getAccountInfo.key]: getAccountInfo,
-    [getUsage.key]:       getUsage,
   },
 
   creates: {
@@ -72,6 +67,11 @@ const App = {
     [unregisterInbox.key]: unregisterInbox,
     [getOtpAction.key]:    getOtpAction,
     [deleteMessage.key]:   deleteMessage,
+    [listInboxes.key]:     listInboxes,
+    [listMessages.key]:    listMessages,
+    [listDomains.key]:     listDomains,
+    [getAccountInfo.key]:  getAccountInfo,
+    [getUsage.key]:        getUsage,
   },
 };
 
