@@ -8,7 +8,7 @@ const perform = async (z, bundle) => {
     url:    'https://api2.freecustom.email/v1/inboxes',
     method: 'GET',
   });
-  const all = response.data.data || [];
+  const all = (response.data.data || []).map(i => ({ ...i, id: i.inbox }));
   // Client-side filter if user provided one
   const f = (bundle.inputData.filter || '').toLowerCase();
   return f ? all.filter(i => i.inbox.includes(f) || i.domain.includes(f)) : all;

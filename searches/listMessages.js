@@ -4,7 +4,8 @@ const perform = async (z, bundle) => {
     url:    `https://api2.freecustom.email/v1/inboxes/${encodeURIComponent(bundle.inputData.inbox)}/messages`,
     method: 'GET',
   });
-  return response.data.data || [];
+  const messages = response.data.data || [];
+  return messages.map(m => ({ ...m, id: m.id || m.message_id }));
 };
 
 module.exports = {
