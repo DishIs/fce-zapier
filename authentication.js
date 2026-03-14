@@ -19,7 +19,7 @@ module.exports = {
       type:     'password',
       required: true,
       helpText:
-        'Your FreeCustom.Email API key. Find it at [freecustom.email/dashboard](https://freecustom.email/dashboard) → API Keys. Keys start with `fce_`.',
+        'Your FreeCustom.Email API key. Find it at [freecustom.email/dashboard](https://www.freecustom.email/api/dashboard) → API Keys. Keys start with `fce_`.',
     },
   ],
   test: testAuth,
