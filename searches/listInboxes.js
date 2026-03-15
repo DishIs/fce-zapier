@@ -11,11 +11,7 @@ const perform = async (z, bundle) => {
   const all = (response.data.data || []).map(i => ({ ...i, id: i.inbox }));
   // Client-side filter if user provided one
   const f = (bundle.inputData.filter || '').toLowerCase();
-  const filtered = f ? all.filter(i => i.inbox.includes(f) || i.domain.includes(f)) : all;
-  return {
-    count:   filtered.length,
-    inboxes: filtered,
-  };
+  return f ? all.filter(i => i.inbox.includes(f) || i.domain.includes(f)) : all;
 };
 
 module.exports = {
@@ -40,14 +36,9 @@ module.exports = {
     ],
     perform,
     sample: {
-      count:   1,
-      inboxes: [
-        {
-          inbox:  'mytest@ditube.info',
-          local:  'mytest',
-          domain: 'ditube.info',
-        },
-      ],
+      inbox:  'mytest@ditube.info',
+      local:  'mytest',
+      domain: 'ditube.info',
     },
     outputFields: [
       { key: 'inbox',  label: 'Inbox Address' },

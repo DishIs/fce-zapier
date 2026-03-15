@@ -9,11 +9,7 @@ const perform = async (z, bundle) => {
   });
   const all = (response.data.data || []).map(d => ({ ...d, id: d.domain }));
   const tier = bundle.inputData.tier;
-  const filtered = tier ? all.filter(d => d.tier === tier) : all;
-  return {
-    count:   filtered.length,
-    domains: filtered,
-  };
+  return tier ? all.filter(d => d.tier === tier) : all;
 };
 
 module.exports = {
@@ -39,15 +35,10 @@ module.exports = {
     ],
     perform,
     sample: {
-      count:   1,
-      domains: [
-        {
-          domain:        'ditube.info',
-          tier:          'free',
-          tags:          ['popular'],
-          expiring_soon: false,
-        },
-      ],
+      domain:        'ditube.info',
+      tier:          'free',
+      tags:          ['popular'],
+      expiring_soon: false,
     },
     outputFields: [
       { key: 'domain',          label: 'Domain' },

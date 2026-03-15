@@ -14,10 +14,7 @@ const perform = async (z, bundle) => {
     verificationLink: m.verification_link || m.verificationLink,
     hasAttachment:    m.has_attachment || m.hasAttachment || false,
   }));
-  return {
-    count:    messages.length,
-    messages: messages,
-  };
+  return messages;
 };
 
 module.exports = {
@@ -37,14 +34,9 @@ module.exports = {
     ],
     perform,
     sample: {
-      count:    1,
-      messages: [
-        {
-          id: 'D3vt8NnEQ', from: 'no-reply@github.com', to: 'mytest@ditube.info',
-          subject: 'Your verification code', date: '2024-03-12T10:34:27.000Z',
-          otp: '482910', verificationLink: null, hasAttachment: false,
-        },
-      ],
+      id: 'D3vt8NnEQ', from: 'no-reply@github.com', to: 'mytest@ditube.info',
+      subject: 'Your verification code', date: '2024-03-12T10:34:27.000Z',
+      otp: '482910', verificationLink: null, hasAttachment: false,
     },
     outputFields: [
       { key: 'id',               label: 'Email ID' },
