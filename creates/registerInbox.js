@@ -5,7 +5,7 @@ const perform = async (z, bundle) => {
     method: 'POST',
     body: { inbox: bundle.inputData.inbox },
   });
-  return response.data;
+  return response.data.data || response.data;
 };
 
 module.exports = {
