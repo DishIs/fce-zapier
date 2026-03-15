@@ -8,7 +8,16 @@ const perform = async (z, bundle) => {
     url:    'https://api2.freecustom.email/v1/inboxes',
     method: 'GET',
   });
-  const all = (response.data.data || []).map(i => ({ ...i, id: i.inbox }));
+  const inboxStrings = response.data.data?.inboxes || [];
+  const all = inboxStrings.map(inbox => {
+    const [local, domain] = inbox.split('@');
+    return {
+      id:     inbox,
+      inbox:  inbox,
+      local:  local,
+      domain: domain,
+    };
+  });
   // Client-side filter if user provided one
   const f = (bundle.inputData.filter || '').toLowerCase();
   return f ? all.filter(i => i.inbox.includes(f) || i.domain.includes(f)) : all;

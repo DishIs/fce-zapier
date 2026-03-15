@@ -7,7 +7,15 @@ const perform = async (z, bundle) => {
     url:    'https://api2.freecustom.email/v1/domains',
     method: 'GET',
   });
-  const all = (response.data.data || []).map(d => ({ ...d, id: d.domain }));
+  const all = (response.data.data || []).map(d => ({
+    id:              d.domain,
+    domain:          d.domain,
+    tier:            d.tier,
+    tags:            d.tags || [],
+    expires_at:      d.expires_at,
+    expires_in_days: d.expires_in_days,
+    expiring_soon:   d.expiring_soon || false,
+  }));
   const tier = bundle.inputData.tier;
   return tier ? all.filter(d => d.tier === tier) : all;
 };

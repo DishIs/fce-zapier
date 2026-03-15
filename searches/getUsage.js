@@ -7,7 +7,18 @@ const perform = async (z, bundle) => {
     url:    'https://api2.freecustom.email/v1/usage',
     method: 'GET',
   });
-  return [response.data.data || response.data];
+  const data = response.data.data || {};
+  return [{
+    id:                 data.plan || 'current',
+    plan:               data.plan,
+    resets_at:          data.period?.resets_at,
+    requests_used:      data.requests?.used,
+    requests_limit:     data.requests?.limit,
+    requests_remaining: data.requests?.remaining,
+    percent_used:       data.requests?.percent_used,
+    credits_balance:    data.credits?.balance,
+    rate_limit_sec:     data.rate_limit?.requests_per_second,
+  }];
 };
 
 module.exports = {
@@ -34,22 +45,25 @@ module.exports = {
     ],
     perform,
     sample: {
-      plan:               'developer',
+      id:                 'startup',
+      plan:               'startup',
+      resets_at:          '2026-04-01T00:00:00Z',
       requests_used:      1240,
-      requests_limit:     100000,
-      requests_remaining: 98760,
-      percent_used:       '1.2%',
-      credits_remaining:  0,
-      resets:             '2024-04-28T00:00:00Z',
+      requests_limit:     500000,
+      requests_remaining: 498760,
+      percent_used:       0.25,
+      credits_balance:    25000,
+      rate_limit_sec:     25,
     },
     outputFields: [
       { key: 'plan',               label: 'Plan' },
+      { key: 'resets_at',          label: 'Resets At',          type: 'datetime' },
       { key: 'requests_used',      label: 'Requests Used',      type: 'integer' },
       { key: 'requests_limit',     label: 'Requests Limit',     type: 'integer' },
       { key: 'requests_remaining', label: 'Requests Remaining', type: 'integer' },
-      { key: 'percent_used',       label: 'Percent Used' },
-      { key: 'credits_remaining',  label: 'Credits Remaining',  type: 'integer' },
-      { key: 'resets',             label: 'Resets At' },
+      { key: 'percent_used',       label: 'Percent Used',       type: 'number' },
+      { key: 'credits_balance',    label: 'Credits Balance',    type: 'integer' },
+      { key: 'rate_limit_sec',     label: 'Rate Limit (Sec)',    type: 'integer' },
     ],
   },
 };

@@ -31,32 +31,34 @@ const getFallbackEmails = async (z, bundle) => {
     url:    `https://api2.freecustom.email/v1/inboxes/${encodeURIComponent(bundle.inputData.inbox)}/messages`,
     method: 'GET',
   });
-  const messages = response.data.data || [];
-  return messages.map(m => ({
-    id:               m.message_id || m.id,
-    from:             m.from,
-    to:               m.inbox || m.to,
-    subject:          m.subject,
-    date:             m.received_at || m.date,
-    message:          m.message || m.text || '',
-    otp:              m.otp,
-    verificationLink: m.verification_link || m.verificationLink,
-    hasAttachment:    m.has_attachment || m.hasAttachment || false,
+  const data = response.data.data || {};
+  const inbox = data.inbox;
+  const messages = (data.messages || []).map(m => ({
+    id:                m.id,
+    inbox:             inbox,
+    from:              m.from,
+    subject:           m.subject,
+    date:              m.date,
+    has_attachment:    m.has_attachment || false,
+    otp:               m.otp,
+    verification_link: m.verification_link,
   }));
+  return messages;
 };
 
 const perform = (z, bundle) => {
-  const m = bundle.cleanedRequest;
+  const payload = bundle.cleanedRequest;
+  // REST Hook payload format from OpenAPI websocket spec
+  const m = payload.message || {};
   return [{
-    id:               m.message_id || m.id,
-    from:             m.from,
-    to:               m.inbox || m.to,
-    subject:          m.subject,
-    date:             m.received_at || m.date,
-    message:          m.message || m.text || '',
-    otp:              m.otp,
-    verificationLink: m.verification_link || m.verificationLink,
-    hasAttachment:    m.has_attachment || m.hasAttachment || false,
+    id:                m.id || payload.id, // fallback to top-level if needed
+    inbox:             payload.inbox,
+    from:              m.from || payload.from,
+    subject:           m.subject || payload.subject,
+    date:              m.date || payload.date,
+    has_attachment:    m.has_attachment || payload.has_attachment || false,
+    otp:               m.otp || payload.otp,
+    verification_link: m.verification_link || payload.verification_link,
   }];
 };
 
@@ -93,27 +95,25 @@ module.exports = {
     perform:            perform,
 
     sample: {
-      id:               'D3vt8NnEQ',
-      from:             'no-reply@github.com',
-      to:               'mytest@ditube.info',
-      subject:          'Your GitHub verification code',
-      date:             '2024-03-12T10:34:27.000Z',
-      message:          'Your verification code is 482910',
-      otp:              '482910',
-      verificationLink: 'https://github.com/verify?code=482910',
-      hasAttachment:    false,
+      id:                'D3vt8NnEQ',
+      inbox:             'mytest@ditube.info',
+      from:              'no-reply@github.com',
+      subject:           'Your GitHub verification code',
+      date:              '2024-03-12T10:34:27.000Z',
+      has_attachment:    false,
+      otp:               '482910',
+      verification_link: 'https://github.com/verify?code=482910',
     },
 
     outputFields: [
-      { key: 'id',               label: 'Email ID' },
-      { key: 'from',             label: 'From' },
-      { key: 'to',               label: 'To' },
-      { key: 'subject',          label: 'Subject' },
-      { key: 'date',             label: 'Date',             type: 'datetime' },
-      { key: 'message',          label: 'Message Body' },
-      { key: 'otp',              label: 'OTP Code' },
-      { key: 'verificationLink', label: 'Verification Link' },
-      { key: 'hasAttachment',    label: 'Has Attachment',   type: 'boolean' },
+      { key: 'id',                label: 'Email ID' },
+      { key: 'inbox',             label: 'Inbox Address' },
+      { key: 'from',              label: 'From' },
+      { key: 'subject',           label: 'Subject' },
+      { key: 'date',              label: 'Date',             type: 'datetime' },
+      { key: 'has_attachment',    label: 'Has Attachment',   type: 'boolean' },
+      { key: 'otp',               label: 'OTP Code' },
+      { key: 'verification_link', label: 'Verification Link' },
     ],
   },
 };
