@@ -31,12 +31,12 @@ module.exports = {
     inputFields: [
       {
         key: 'inbox', label: 'Inbox Address', type: 'string', required: true,
-        helpText: 'The inbox to fetch messages from, e.g. `mytest@ditube.info`.',
+        helpText: 'The inbox to fetch messages from, e.g. `mytest@haloforge.online`.',
       },
     ],
     perform,
     sample: {
-      id: 'D3vt8NnEQ', from: 'no-reply@github.com', to: 'mytest@ditube.info',
+      id: 'D3vt8NnEQ', from: 'no-reply@github.com', to: 'mytest@haloforge.online',
       subject: 'Your verification code', date: '2024-03-12T10:34:27.000Z',
       otp: '482910', verificationLink: null, hasAttachment: false,
     },

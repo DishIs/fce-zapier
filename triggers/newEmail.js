@@ -84,7 +84,7 @@ module.exports = {
         label:    'Inbox Address',
         type:     'string',
         required: true,
-        helpText: 'The inbox to watch for new emails, e.g. `mytest@ditube.info`. Must be registered first via the **Register Inbox** action.',
+        helpText: 'The inbox to watch for new emails, e.g. `mytest@haloforge.online`. Must be registered first via the **Register Inbox** action.',
       },
     ],
 
@@ -96,7 +96,7 @@ module.exports = {
 
     sample: {
       id:                'D3vt8NnEQ',
-      inbox:             'mytest@ditube.info',
+      inbox:             'mytest@haloforge.online',
       from:              'no-reply@github.com',
       subject:           'Your GitHub verification code',
       date:              '2024-03-12T10:34:27.000Z',

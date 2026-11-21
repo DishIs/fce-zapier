@@ -9,7 +9,7 @@ describe('triggers.new_email', () => {
   it('should return fallback messages from inbox', async () => {
     const bundle = {
       authData:  { apiKey: process.env.API_KEY },
-      inputData: { inbox: process.env.TEST_INBOX || 'test@ditube.info' },
+      inputData: { inbox: process.env.TEST_INBOX || 'test@haloforge.online' },
       // Simulates targetUrl for REST hooks testing
       targetUrl: 'https://hooks.zapier.com/hooks/catch/test/',
     };

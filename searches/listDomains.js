@@ -43,7 +43,7 @@ module.exports = {
     ],
     perform,
     sample: {
-      domain:        'ditube.info',
+      domain:        'haloforge.online',
       tier:          'free',
       tags:          ['popular'],
       expiring_soon: false,

@@ -20,10 +20,10 @@ module.exports = {
     inputFields: [
       {
         key: 'inbox', label: 'Inbox Address', type: 'string', required: true,
-        helpText: 'Full email address to register, e.g. `mytest@ditube.info`.',
+        helpText: 'Full email address to register, e.g. `mytest@haloforge.online`.',
       },
     ],
     perform,
-    sample: { success: true, message: 'Inbox registered.', inbox: 'mytest@ditube.info' },
+    sample: { success: true, message: 'Inbox registered.', inbox: 'mytest@haloforge.online' },
   },
 };

@@ -19,7 +19,7 @@ module.exports = {
     inputFields: [
       {
         key: 'inbox', label: 'Inbox Address', type: 'string', required: true,
-        helpText: 'The inbox to check for OTPs, e.g. `mytest@ditube.info`.',
+        helpText: 'The inbox to check for OTPs, e.g. `mytest@haloforge.online`.',
       },
     ],
     perform,

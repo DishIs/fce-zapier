@@ -58,7 +58,7 @@ module.exports = {
     sample: {
       id:               'D3vt8NnEQ',
       from:             'no-reply@github.com',
-      to:               'mytest@ditube.info',
+      to:               'mytest@haloforge.online',
       subject:          'Your verification code',
       date:             '2024-03-12T10:34:27.000Z',
       text:             'Your code is 482910',

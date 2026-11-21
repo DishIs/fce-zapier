@@ -40,14 +40,14 @@ module.exports = {
         label:    'Filter',
         type:     'string',
         required: false,
-        helpText: 'Optional. Filter results by inbox address or domain (e.g. "ditube.info"). Leave blank to return all inboxes.',
+        helpText: 'Optional. Filter results by inbox address or domain (e.g. "haloforge.online"). Leave blank to return all inboxes.',
       },
     ],
     perform,
     sample: {
-      inbox:  'mytest@ditube.info',
+      inbox:  'mytest@haloforge.online',
       local:  'mytest',
-      domain: 'ditube.info',
+      domain: 'haloforge.online',
     },
     outputFields: [
       { key: 'inbox',  label: 'Inbox Address' },

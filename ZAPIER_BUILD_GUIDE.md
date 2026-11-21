@@ -62,7 +62,7 @@ npm install
 cp .env.example .env
 # Edit .env and fill in:
 #   API_KEY=fce_your_real_api_key
-#   TEST_INBOX=test@ditube.info
+#   TEST_INBOX=test@haloforge.online
 
 ══════════════════════════════════════════════════════════════
 STEP 3 — VALIDATE LOCALLY
